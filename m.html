@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Race of Cars</title>
+<style>
+  .car-img {
+    width: 100px;
+    height: auto;
+    transition: transform 0.5s ease-in-out;
+  }
+</style>
+</head>
+<body>
+
+<h1>Race of Cars</h1>
+
+<div id="car-info"></div>
+
+<script>
+  class Car {
+    constructor(brand, model, year, color, price, gas) {
+      this.brand = brand;
+      this.model = model;
+      this.year = year;
+      this.color = color;
+      this.price = price;
+      this.gas = gas;
+    }
+    
+    honk() {
+      console.log("Tuut tuut");
+      console.log(`Brand: ${this.brand}, Model: ${this.model}, Year: ${this.year}, Color: ${this.color}, Price: ${this.price}`);
+    }
+
+    race(turn) {
+      let gasLoss = 5 + (new Date().getFullYear() - this.year);
+      this.gas -= gasLoss;
+      let info = `After turn ${turn}: ${this.brand} has ${this.gas} liters of gas remaining.`;
+      let finalInfo = (turn === 7) ? `After the race: ${this.brand} has ${this.gas} liters of gas remaining.` : '';
+      document.getElementById("car-info").innerHTML += `<p>${info}</p>`;
+      if (turn === 7) {
+        console.log(finalInfo);
+        document.getElementById("car-info").innerHTML += `<p>${finalInfo}</p>`;
+      }
+      let img = document.getElementById(`${this.brand.toLowerCase()}-img`);
+      img.style.transform = `translateX(${turn * 20}px)`;
+    }
+  }
+
+  // Create car objects
+  const cars = [
+    new Car("Honda", "CR-V", 2023, "Red", 50000, 45),
+    new Car("Ford", "F-150", 2020, "Black", 25000, 30),
+    new Car("BMW", "X5", 2022, "Green", 60000, 65),
+    new Car("Mazda", "CX-5", 2019, "White", 15000, 60),
+    new Car("Audi", "Q7", 2018, "Silver", 52000, 47),
+    new Car("Kia", "Forte", 2020, "Blue", 21000, 56)
+  ];
+
+  // Invoke honk method for each car and start race
+  cars.forEach((car, index) => {
+    car.honk();
+    let img = document.createElement("img");
+    img.setAttribute("src", `${car.brand.toLowerCase()}.jpg`);
+    img.setAttribute("alt", `${car.brand} ${car.model}`);
+    img.setAttribute("class", "car-img");
+    img.setAttribute("id", `${car.brand.toLowerCase()}-img`);
+    document.body.appendChild(img);
+    setTimeout(() => {
+      for (let i = 0; i < 7; i++) {
+        car.race(i + 1);
+      }
+    }, index * 2000);
+  });
+</script>
+
+</body>
+</html>
