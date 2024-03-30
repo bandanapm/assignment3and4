@@ -1,0 +1,17 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+#carInfo {
+    margin-top: 20px;
+}
+
+button {
+    display: block;
+    margin: 20px auto;
+}
