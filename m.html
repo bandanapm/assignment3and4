@@ -45,7 +45,7 @@
         document.getElementById("car-info").innerHTML += `<p>${finalInfo}</p>`;
       }
       let img = document.getElementById(`${this.brand.toLowerCase()}-img`);
-      img.style.transform = `translateX(${turn * 20}px)`;
+      img.style.transform = `translateY(${turn * 20}px)`;
     }
   }
 
@@ -63,7 +63,7 @@
   cars.forEach((car, index) => {
     car.honk();
     let img = document.createElement("img");
-    img.setAttribute("src", `${car.brand.toLowerCase()}.jpg`);
+    img.setAttribute("src", `images/${car.brand.toLowerCase()}.jpg`);
     img.setAttribute("alt", `${car.brand} ${car.model}`);
     img.setAttribute("class", "car-img");
     img.setAttribute("id", `${car.brand.toLowerCase()}-img`);
